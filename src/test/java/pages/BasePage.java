@@ -23,15 +23,29 @@ public class BasePage {
     public static void tearDown() {
         LOG.info("Close the browser");
         driver.quit();
+    }
+
+    public static void sleep(long ms) {
+        try {
+            Thread.sleep(ms)
+            ;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String returnBaseUrl() {
+        return "https://demo.automationtesting.in/Index.html";
 
     }
 
-public static void sleep(long ms){
-        try{
-            Thread.sleep(ms);
-        }catch (InterruptedException e){
-            e.printStackTrace();
+    public static String getBaseUrl() {
+        String baseurl = returnBaseUrl();
+        if (baseurl != null) {
+            return baseurl.replace("Index.html", "");
         }
-}
+        return baseurl;
+    }
+
 
 }
