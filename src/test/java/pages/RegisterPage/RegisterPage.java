@@ -1,6 +1,8 @@
 package pages.RegisterPage;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.BasePage;
@@ -32,6 +34,16 @@ public class RegisterPage extends BasePage {
     private By checkboxCricket = By.xpath("//input[@value='Cricket']");
     private By checkboxMovies = By.xpath("//input[@value='Movies']");
     private By checkboxHockey = By.xpath("//input[@value='Hockey']");
+    private By chooseFieldLanguage = By.id("msdd");
+    String selectLanguage = "//a[contains(text(), '%s')]";
+    String selectSkill = "Skills";
+    private By selectCountry = By.xpath("//span[@role='combobox']");
+    private By searchField = By.xpath("//input[@type='search']");
+    private By birthYear = By.id("yearbox");
+    private By birthMonth = By.xpath("//select[@placeholder='Month']");
+    private By birthDay = By.id("daybox");
+    private By firstPassword = By.id("firstpassword");
+    private By secondPassword = By.id("secondpassword");
 
 
     public void firstNameField(String fname) {
@@ -85,6 +97,42 @@ public class RegisterPage extends BasePage {
         driver.findElement(checkboxHockey).click();
     }
 
+    public void selectLanguage(String language) {
+        LOG.info("Click on language box 'Languages'");
+        driver.findElement(chooseFieldLanguage).click();
+        driver.findElement(By.xpath(String.format(selectLanguage, language))).click();
+    }
+
+    public void selectSkill(String skill) {
+        LOG.info("Click on skill box 'Skills'");
+        Select newskill = new Select(driver.findElement(By.id(selectSkill)));
+        newskill.selectByValue(skill);
+    }
+
+    public void clickSelectCountry(String country) {
+        LOG.info("Select country field");
+        driver.findElement(selectCountry).click();
+        driver.findElement(searchField).sendKeys(country);
+        driver.findElement(searchField).sendKeys(Keys.ENTER);
+    }
+
+    public void birthDate(String year, String month, String day) {
+        LOG.info("Select Birthdate");
+        Select birthYearDate = new Select(driver.findElement(birthYear));
+        birthYearDate.selectByValue(year);
+        Select birthMonthDate = new Select(driver.findElement(birthMonth));
+        birthMonthDate.selectByValue(month);
+        Select birthDayDate = new Select(driver.findElement(birthDay));
+        birthDayDate.selectByValue(day);
+    }
 
 
+    
+    public void confirmPasswordFields(String password, String confirmPassword) {
+
+        LOG.info("Enter First password");
+        driver.findElement(firstPassword).sendKeys(password);
+        driver.findElement(secondPassword).sendKeys(confirmPassword);
+
+    }
 }
