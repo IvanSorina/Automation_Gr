@@ -19,12 +19,11 @@ public class RegisterTest extends BaseTest {
     String language = "Romanian";
     String skill = "Java";
     String country = "India";
-String year="1992";
-String month="February";
-String day="14";
+    String year = "1992";
+    String month = "February";
+    String day = "14";
     String firstPassword = "BlaBla";
     String secondPassword = "BlaBla";
-
 
 
     @Test
@@ -79,10 +78,18 @@ String day="14";
         registerPage.clickSelectCountry(country);
 
         LOG.info("Select Birth Date");
-        registerPage.birthDate(year,month,day);
+        registerPage.birthDate(year, month, day);
 
 
         LOG.info("Confirm Password Fields");
-        registerPage.confirmPasswordFields(firstPassword,secondPassword);
+        registerPage.confirmPasswordFields(firstPassword, secondPassword);
+        sleep(2000);
+        LOG.info("Uploading file");
+        registerPage.uploadFile();
+        sleep(2000);
+        LOG.info("Click 'submit' button");
+        registerPage.submitButton();
+        sleep(2000);
+
     }
 }
